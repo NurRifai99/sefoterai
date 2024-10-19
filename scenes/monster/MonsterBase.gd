@@ -1,50 +1,36 @@
-class_name Monster
 extends CharacterBody2D
 
-var health: int
-var damage: int
-var speed: float
-var current_dir: String = "none"
-var player_detected: bool = false
-var attack_area: Area2D  # Area untuk menyerang
+# Atribut dasar untuk semua monster
+var health = 100
+var damage = 10
+var speed = 50
+var target_player = null  # Referensi ke pemain yang ingin dikejar
 
-func _ready():
-	# Mengatur atribut default untuk monster
-	health = 100
-	damage = 10
-	speed = 70
-	attack_area = $AttackArea  # Pastikan ini adalah node Area2D untuk serangan
+# Fungsi untuk mengejar pemain
+func _physics_process(delta):
+	if target_player:
+		chase_player(delta)
 
-func take_damage(amount: int):
+func chase_player(delta):
+	# Hitung arah ke pemain
+	var direction = (target_player.position - position).normalized()
+	velocity = direction * speed  # Atur kecepatan sesuai arah
+	move_and_slide()  # Panggil move_and_slide tanpa argumen
+
+# Fungsi untuk menerima damage
+func take_damage(amount):
 	health -= amount
 	if health <= 0:
-		queue_free()  # Hapus monster saat health habis
+		die()
 
-func move_towards_player(player_position: Vector2, delta: float):
-	var direction = (player_position - position).normalized()
-	velocity = direction * speed
-	move_and_slide()
+func die():
+	queue_free()  # Hapus monster dari scene
 
 # Fungsi untuk mendeteksi pemain
-func _on_Area2D_body_entered(body: Node):
-	if body.has_method("take_damage"):
-		player_detected = true  # Menandakan bahwa pemain terdeteksi
-		print("Player detected")
+func _on_Area2D_body_entered(body):
+	if body.is_in_group("players"):  # Pastikan pemain berada dalam grup "players"
+		target_player = body  # Set target pemain yang dikejar
 
-# Fungsi untuk menghandle keluar dari area deteksi
-func _on_Area2D_body_exited(body: Node):
-	player_detected = false  # Reset status deteksi
-	print("Player exited")
-
-func _process(delta):
-	if player_detected:
-		var player = get_node("res://scenes/playa.tscn")  # Ganti dengan path ke pemain
-		move_towards_player(player.position, delta)
-
-		# Periksa apakah monster berada dalam area serangan pemain
-		if attack_area.get_overlapping_bodies().has(player):  # Ganti "body" dengan referensi ke objek pemain
-			attack(player)
-
-func attack(target: Node):
-	if target:
-		target.take_damage(damage)  # Memberikan damage yang ditentukan ke pemain
+func _on_Area2D_body_exited(body):
+	if body.is_in_group("players"):
+		target_player = null  # Hentikan pengejaran jika pemain keluar dari area

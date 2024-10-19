@@ -1,31 +1,41 @@
 extends CharacterBody2D
 
-var attack_ip = false
-var health = 100  
-var damage = 20   
-var speed = 75  
-var current_dir = "none" 
+var enemy_inattack_range = false
+var enemy_attack_cooldown = true
+var health = 100
+var player_alive = true
 
+var attack_ip =  false  # Indicates if attack is in progress
 
-
-# Untuk mendeteksi monster dalam area serangan
-@onready var attack_area = $AttackArea  # Pastikan ini adalah node Area2D yang ada di scene
+const speed = 70
+var current_dir = "none"
+var attack_duration = 0.5  # Duration of attack animation in seconds
+var attack_timer = 0.0  # Timer to track attack progress
 
 func _physics_process(delta):
 	player_movement(delta)
-
-	if health <= 0:
-		print("Player has been killed")
-		queue_free()  # Hapus pemain dari scene jika health habis
-
-	# Jika pemain menyerang
-	if Input.is_action_just_pressed("attack"):
-		print("attack")
-		perform_attack()
-
+	
+	# Handle attack cooldown and animation timing
+	if attack_ip:
+		attack_timer -= delta
+		if attack_timer <= 0:
+			attack_ip = false  # End the attack
+			attack_timer = 0.0
+	
+	if health <= 0 :
+		player_alive = false
+		health = 0
+		print("player has been killed")
+		self.queue_free()
+	
 func player_movement(_delta):
+	# Disable movement during attack
+	if attack_ip:
+		play_anim(2)  # Play attack animation
+		return
+	
 	velocity = Vector2.ZERO  # Reset velocity each frame
-
+	
 	if Input.is_action_pressed("move_right"):
 		current_dir = "right"
 		velocity.x += speed
@@ -40,63 +50,65 @@ func player_movement(_delta):
 		current_dir = "up"
 		velocity.y -= speed
 
-	# Normalisasi kecepatan untuk mencegah pergerakan diagonal yang lebih cepat
+	# Normalize the velocity to prevent faster diagonal movement
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		play_anim(1)
-	else:
+	else :
 		play_anim(0)
 
 	move_and_slide()
 
+# Handle attack input
+func _input(event):
+	if event.is_action_pressed("attack") and not attack_ip:  # If attack button is pressed and no attack is in progress
+		attack_ip = true
+		attack_timer = attack_duration  # Set attack duration
+		play_anim(2)  # Trigger attack animation
+
 func play_anim(movement):
-	var anim = $AnimatedSprite2D
-
-	if current_dir == "right":
-		anim.flip_h = false
-		anim.play("side_walk" if movement == 1 else "side_idle")
-	elif current_dir == "left":
-		anim.flip_h = true
-		anim.play("side_walk" if movement == 1 else "side_idle")
-	elif current_dir == "up":
-		anim.play("back_walk" if movement == 1 else "back_idle")
-	elif current_dir == "down": 
-		anim.play("front_walk" if movement == 1 else "front_idle")
-
-# Fungsi untuk melakukan serangan
-func perform_attack():
 	var dir = current_dir
+	var anim = $AnimatedSprite2D
 	
-	var animasi = $AnimatedSprite2D
+	if attack_ip:  # If attack is in progress, play attack animation based on direction
+		if dir == "right":
+			anim.flip_h = false
+			anim.play("side_attack")
+		elif dir == "left":
+			anim.flip_h = true
+			anim.play("side_attack")
+		elif dir == "up":
+			anim.play("back_attack")
+		elif dir == "down":
+			anim.play("front_attack")
+		return  # Exit the function to avoid playing walk/idle animations
+
 	if dir == "right":
-		animasi.flip_h = false
-		animasi.play("side_attack")
-	elif dir == "left":
-		animasi.flip_h = true
-		animasi.play("side_attack")
-	elif dir == "up":
-		animasi.play("back_attack")
-	elif dir == "down":
-		animasi.play("front_attack")
+		anim.flip_h = false
+		if movement == 1:
+			anim.play("side_walk")
+		elif movement == 0:
+			anim.play("side_idle")
+			
+	if dir == "left":
+		anim.flip_h = true
+		if movement == 1:
+			anim.play("side_walk")
+		elif movement == 0:
+			anim.play("side_idle")
 	
-	attack_ip = true  # Menandakan bahwa pemain sedang menyerang
+	if dir == "up":
+		if movement == 1:
+			anim.play("back_walk")
+		elif movement == 0:
+			anim.play("back_idle")
 	
-	#Pastikan ada animasi serangan
+	if dir == "down":
+		if movement == 1:
+			anim.play("front_walk")
+		elif movement == 0:
+			anim.play("front_idle")
 
-	# Mendapatkan semua monster dalam area serangan
-	for body in attack_area.get_overlapping_bodies():
-		if body.is_in_group("monster") and body.has_method("take_damage"):
-			attack(body)
 
-func attack(target: Node):
-	if target:
-		target.take_damage(damage)  # Memberikan damage yang ditentukan ke monster
-
-func take_damage(amount: int):
-	health -= amount  # Mengurangi health pemain
-	if health <= 0:
-		queue_free()  # Hapus pemain dari scene jika health habis
- 
-
-func _on_attack_area_body_entered(_body: Node2D) -> void:
-	pass # Replace with function body
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
