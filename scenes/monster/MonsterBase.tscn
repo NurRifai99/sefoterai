@@ -1,0 +1,109 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0yltidp3dfa"]
+
+[sub_resource type="GDScript" id="GDScript_fphpl"]
+script/source = "extends CharacterBody2D
+
+var speed = 35
+var playa = null
+var player_chase = false
+
+var health = 50
+var player_inattack_zone = false
+
+var can_take_damage = true
+var knockback_force = Vector2.ZERO
+var knockback_strength = 100  # Adjust this value to control knockback strength
+var is_knocked_back = false
+var knockback_duration = 0.3  # Time the enemy should be knocked back
+var knockback_timer = 0.0
+
+func _physics_process(delta):
+	deal_with_damage()
+
+	if is_knocked_back:
+		# Apply knockback movement
+		position += knockback_force * delta
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			is_knocked_back = false
+			knockback_force = Vector2.ZERO
+	elif player_chase and playa != null:
+		position += (playa.position - position).normalized() * speed * delta
+		move_and_collide(Vector2(0,0)) 
+		$AnimatedSprite2D.play(\"walk\")
+		if(playa.position.x - position.x) < 0:
+			$AnimatedSprite2D.flip_h = true
+		else:
+			$AnimatedSprite2D.flip_h = false
+	else:
+		$AnimatedSprite2D.play(\"idle\")
+		
+func _on_area_2d_body_entered(body):
+	playa = body
+	player_chase = true
+	
+func _on_area_2d_body_exited(_body) -> void:
+	player_chase = false
+	playa = null
+
+func enemy():
+	pass
+
+func _on_enemy_hitbox_body_entered(body: Node2D) -> void:
+	if body.has_method(\"player\"):
+		player_inattack_zone = true
+
+func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
+	if body.has_method(\"player\"):
+		player_inattack_zone = false
+
+func deal_with_damage():
+	if player_inattack_zone and Global.player_current_attack == true:
+		if can_take_damage == true:
+			health -= 20
+			$take_damage_cooldown.start()
+			can_take_damage = false
+			print(\"slime health : \", health)
+			apply_knockback()  # Apply knockback when damaged
+			if health <= 0 :
+				self.queue_free()
+
+func _on_take_damage_cooldown_timeout() -> void:
+	can_take_damage = true
+
+# Function to apply knockback based on player position
+func apply_knockback():
+	if playa != null:  # Check that playa is not null before accessing position
+		is_knocked_back = true
+		knockback_timer = knockback_duration
+		
+		# Calculate the direction away from the player
+		knockback_force = (position - playa.position).normalized() * knockback_strength
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2mo2g"]
+radius = 54.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nuq8l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s8bea"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["monster"]]
+script = SubResource("GDScript_fphpl")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_2mo2g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nuq8l")
+
+[node name="take_damage_cooldown" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s8bea")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
