@@ -4,6 +4,7 @@ extends CharacterBody2D
 var health = 100
 var damage = 10
 var speed = 50
+var attack_cooldown = 0
 var target_player = null  # Referensi ke pemain yang ingin dikejar
 
 # Fungsi untuk mengejar pemain

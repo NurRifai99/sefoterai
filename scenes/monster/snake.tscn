@@ -1,0 +1,94 @@
+[gd_scene load_steps=13 format=3 uid="uid://bxr4ganlie00u"]
+
+[ext_resource type="Texture2D" uid="uid://bfp74usm5oksh" path="res://art/characters/monster/Snake/Snake.png" id="1_ksyjc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2rlo"]
+atlas = ExtResource("1_ksyjc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3and8"]
+atlas = ExtResource("1_ksyjc")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp2oo"]
+atlas = ExtResource("1_ksyjc")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8tit"]
+atlas = ExtResource("1_ksyjc")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjyd7"]
+atlas = ExtResource("1_ksyjc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kq1fm"]
+atlas = ExtResource("1_ksyjc")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhb45"]
+atlas = ExtResource("1_ksyjc")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0k5wr"]
+atlas = ExtResource("1_ksyjc")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vg0ka"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2rlo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3and8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lp2oo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8tit")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjyd7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kq1fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhb45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0k5wr")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7nid"]
+radius = 33.0151
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_osvd1"]
+radius = 6.0
+
+[node name="Snake" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vg0ka")
+animation = &"walk"
+frame_progress = 0.845586
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_h7nid")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_osvd1")

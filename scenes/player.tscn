@@ -67,21 +67,21 @@ region = Rect2(192, 240, 48, 48)
 atlas = ExtResource("1_pili7")
 region = Rect2(240, 240, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sx4j6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmgfm"]
 atlas = ExtResource("1_pili7")
-region = Rect2(0, 301, 48, 43)
+region = Rect2(0, 288, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n2f1a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kijk"]
 atlas = ExtResource("1_pili7")
-region = Rect2(48, 301, 48, 43)
+region = Rect2(48, 288, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ives"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_oac0e"]
 atlas = ExtResource("1_pili7")
-region = Rect2(96, 301, 48, 43)
+region = Rect2(96, 288, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_obbcj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_73gd7"]
 atlas = ExtResource("1_pili7")
-region = Rect2(144, 301, 48, 43)
+region = Rect2(144, 288, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3c5wi"]
 atlas = ExtResource("1_pili7")
@@ -262,16 +262,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sx4j6")
+"texture": SubResource("AtlasTexture_lmgfm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n2f1a")
+"texture": SubResource("AtlasTexture_6kijk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8ives")
+"texture": SubResource("AtlasTexture_oac0e")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_obbcj")
+"texture": SubResource("AtlasTexture_73gd7")
 }],
 "loop": true,
 "name": &"front_attack",
@@ -393,14 +393,14 @@ radius = 18.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_33xqa"]
 radius = 5.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_6uffk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 4)
 sprite_frames = SubResource("SpriteFrames_hck3s")
-animation = &"side_attack"
-frame_progress = 0.850072
+animation = &"front_attack"
+frame_progress = 0.517839
 
 [node name="AttackArea" type="Area2D" parent="."]
 

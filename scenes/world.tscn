@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://4t55p83jyau8"]
+[gd_scene load_steps=18 format=3 uid="uid://4t55p83jyau8"]
 
 [ext_resource type="Texture2D" uid="uid://b52x0bwl3pewi" path="res://art/tilesets/layer1-game.png" id="1_vqjub"]
 [ext_resource type="Texture2D" uid="uid://bbjbtg5vfixsc" path="res://art/objects/TilesetNature.png" id="2_l6dbx"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b5sm3ce5yfne7" path="res://art/tilesets/sefoteria-layer-2.png" id="6_chjb6"]
 [ext_resource type="PackedScene" uid="uid://csgibnbxx6sod" path="res://scenes/player.tscn" id="7_xj6ga"]
 [ext_resource type="PackedScene" uid="uid://d0a4jv5kqvx66" path="res://scenes/monster/slime.tscn" id="8_62ayh"]
+[ext_resource type="PackedScene" uid="uid://egarjklhelco" path="res://scenes/monster/reptile.tscn" id="9_0wdu0"]
+[ext_resource type="PackedScene" uid="uid://cemx0db0rqfs4" path="res://scenes/monster/RedSamurai.tscn" id="10_qhekh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5d7g"]
 texture = ExtResource("1_vqjub")
@@ -10479,6 +10481,7 @@ sources/5 = SubResource("TileSetAtlasSource_nd6wh")
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
+metadata/_edit_horizontal_guides_ = [44.0]
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -10495,3 +10498,9 @@ position = Vector2(286, 830)
 
 [node name="Slime" parent="." instance=ExtResource("8_62ayh")]
 position = Vector2(384, 840)
+
+[node name="Reptile" parent="." instance=ExtResource("9_0wdu0")]
+position = Vector2(326, 758)
+
+[node name="RedSamurai" parent="." instance=ExtResource("10_qhekh")]
+position = Vector2(176, 840)

@@ -2,10 +2,10 @@ extends CharacterBody2D
 
 var enemy_inattack_range = false
 var enemy_attack_cooldown = true
-var health = 100
+var health = 150
 var player_alive = true
 
-var attack_ip =  false  # Indicates if attack is in progress
+var attack_ip = false  # Indicates if attack is in progress
 
 const speed = 70
 var current_dir = "none"
@@ -22,11 +22,12 @@ func _physics_process(delta):
 			attack_ip = false  # End the attack
 			attack_timer = 0.0
 	
-	if health <= 0 :
+	if health <= 0:
 		player_alive = false
 		health = 0
-		print("player has been killed")
-		self.queue_free()
+		print("Player has been killed")
+		#self.queue_free()
+		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 	
 func player_movement(_delta):
 	# Disable movement during attack
@@ -54,7 +55,7 @@ func player_movement(_delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		play_anim(1)
-	else :
+	else:
 		play_anim(0)
 
 	move_and_slide()
@@ -109,6 +110,12 @@ func play_anim(movement):
 		elif movement == 0:
 			anim.play("front_idle")
 
+func take_damage(amount: int) -> void:
+	health -= amount
+	if health <= 0:
+		player_alive = false
+		print("Player has been killed")
+		self.queue_free()  # Remove player from the scene
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	pass  # Replace with function body.

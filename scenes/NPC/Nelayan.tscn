@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://c63kgfmfpidj5"]
+
+[ext_resource type="Texture2D" uid="uid://ctyu327oepg22" path="res://art/characters/NPC/OldMan3/SpriteSheet.png" id="1_25yp7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88wos"]
+atlas = ExtResource("1_25yp7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cwy6"]
+atlas = ExtResource("1_25yp7")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbwt1"]
+atlas = ExtResource("1_25yp7")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e76r7"]
+atlas = ExtResource("1_25yp7")
+region = Rect2(16, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aodx3"]
+atlas = ExtResource("1_25yp7")
+region = Rect2(32, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug67k"]
+atlas = ExtResource("1_25yp7")
+region = Rect2(48, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vey1c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88wos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cwy6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbwt1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e76r7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aodx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ug67k")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Nelayan" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vey1c")
+animation = &"walk"
+frame_progress = 0.421816

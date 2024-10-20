@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6clrx6feii7a"]
+
+[ext_resource type="Texture2D" uid="uid://ckquneqc7c0o7" path="res://art/characters/NPC/NinjaMageOrange/SpriteSheet.png" id="1_u8cwn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg5sp"]
+atlas = ExtResource("1_u8cwn")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmktp"]
+atlas = ExtResource("1_u8cwn")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7qde"]
+atlas = ExtResource("1_u8cwn")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dvhw"]
+atlas = ExtResource("1_u8cwn")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4umv1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg5sp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmktp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7qde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dvhw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Penyihir" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4umv1")
