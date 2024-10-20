@@ -131,3 +131,4 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("monster"):  # Pastikan yang terkena serangan adalah monster
 		body.take_damage(damage_player)  # Panggil fungsi take_damage dari monster dan berikan damage
 		print("Monster diserang!")
+		attack_monster(body)
