@@ -1,13 +1,14 @@
-extends Button
+extends Control
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	# Connect the buttons to their respective functions
+	$Button.connect("pressed", Callable(self, "_on_restart_button_pressed"))
+	#$ExitButton.connect("pressed", self, "_on_exit_button_pressed")
 
-func _pressed() -> void:
+func _on_restart_button_pressed() -> void:
+	# Restart the game by changing back to the world scene
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_exit_button_pressed() -> void:
+	# Quit the game
+	get_tree().quit()

@@ -11,9 +11,6 @@ func _ready() -> void:
 	attack_cooldown = 0.7 
 	
 	$AnimatedSprite2D.play("idle")
-	# Memuat sprite dan animasi slime
-	# $AnimatedSprite2D.frames = preload("res://path/to/slime_spritesheet.tres")
-	# $AnimatedSprite2D.play("idle")
 
 func _physics_process(delta: float) -> void:
 	if target_player:  # Jika ada target pemain
@@ -27,27 +24,18 @@ func _physics_process(delta: float) -> void:
 func chase_player(_delta: float) -> void:
 	var direction = (target_player.position - position).normalized()
 	velocity = direction * speed
+	$AnimatedSprite2D.play("walk")
 	move_and_slide()
 
 # Fungsi untuk menyerang pemain
 func attack_player() -> void:
 	can_attack = false  # Nonaktifkan serangan selama cooldown
 	target_player.take_damage(damage)  # Serang pemain
-	$AnimatedSprite2D.play("walk")
+	$AnimatedSprite2D.play("attack")
 	print("player attacked ", damage)  
 	# Reset cooldown
 	await get_tree().create_timer(attack_cooldown).timeout  # Tunggu cooldown selesai
 	can_attack = true  # Aktifkan serangan lagi
-
-# Fungsi untuk menerima damage
-func take_damage(amount: int) -> void:
-	health -= amount
-	if health <= 0:
-		die()
-
-# Fungsi untuk mati
-func die() -> void:
-	queue_free()  # Hapus slime dari scene
 
 # Fungsi
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -63,4 +51,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and can_attack:
 		player_in_range = true
-		attack_player()
+		
+func _on_attack_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player") :
+		player_in_range = false
