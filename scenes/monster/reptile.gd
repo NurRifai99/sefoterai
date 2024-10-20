@@ -7,7 +7,7 @@ func _ready() -> void:
 	health = 100
 	damage = 30
 	speed = 40
-	attack_cooldown = 1.5  
+	attack_cooldown = 0.5
 	
 	$AnimatedSprite2D.play("front_idle")
 	# Memuat sprite dan animasi slime

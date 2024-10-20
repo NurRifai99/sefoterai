@@ -1,23 +1,21 @@
 extends CharacterBody2D
-#
-#var enemy_inattack_range = false
-#var enemy_attack_cooldown = true
+
 var health = 150
 var player_alive = true
+var damage_player = 20
 
-var attack_ip = false  # Indicates if attack is in progress
+var attack_ip = false  # Menunjukkan jika serangan sedang berlangsung
 
 const speed = 70
 var current_dir = "none"
-var attack_duration = 0.5  # Duration of attack animation in seconds
-var attack_timer = 0.0  # Timer to track attack progress
+var attack_timer = 0.0  # Timer untuk melacak progres serangan
 
-
+#func _ready() -> void:
+	#$AttackArea.connect("body_entered",Callable(self, "_on_attack_area_body_entered"))
 
 func _physics_process(delta):
 	player_movement(delta)
 	
-	# Handle attack cooldown and animation timing
 	if attack_ip:
 		attack_timer -= delta
 		if attack_timer <= 0:
@@ -28,11 +26,8 @@ func _physics_process(delta):
 		player_alive = false
 		health = 0
 		print("Player has been killed")
-		#self.queue_free()
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 
-		
-		
 func player_movement(_delta):
 	# Disable movement during attack
 	if attack_ip:
@@ -66,10 +61,13 @@ func player_movement(_delta):
 
 # Handle attack input
 func _input(event):
-	if event.is_action_pressed("attack") and not attack_ip:  # If attack button is pressed and no attack is in progress
+	if event.is_action_pressed("attack") and not attack_ip:  # Jika tombol serang ditekan dan tidak sedang menyerang
 		attack_ip = true
-		attack_timer = attack_duration  # Set attack duration
-		play_anim(2)  # Trigger attack animation
+		attack_timer = 0.4  # Durasi serangan
+		play_anim(2)  # Mainkan animasi serangan
+		print("Player is attacking!")
+		
+
 
 func play_anim(movement):
 	var dir = current_dir
@@ -113,6 +111,14 @@ func play_anim(movement):
 			anim.play("front_walk")
 		elif movement == 0:
 			anim.play("front_idle")
+			
+func attack_monster(monster: Node2D):
+	if not attack_ip:
+		return  # Jika tidak sedang menyerang, keluar dari fungsi
+
+	monster.take_damage(damage_player)  # Berikan damage ke monster
+	print("Player attacked the monster for ", damage_player, " damage!")
+
 
 func take_damage(amount: int) -> void:
 	health -= amount
@@ -120,8 +126,8 @@ func take_damage(amount: int) -> void:
 		player_alive = false
 		print("Player has been killed")
 		self.queue_free()  # Remove player from the scene
-		
-
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	pass  # Replace with function body.
+	if body.is_in_group("monster"):  # Pastikan yang terkena serangan adalah monster
+		body.take_damage(damage_player)  # Panggil fungsi take_damage dari monster dan berikan damage
+		print("Monster diserang!")

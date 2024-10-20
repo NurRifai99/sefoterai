@@ -405,7 +405,7 @@ frame_progress = 0.933802
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(1, 6)
+position = Vector2(4, 12)
 shape = SubResource("CircleShape2D_ayvfb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -417,3 +417,4 @@ position = Vector2(2, 7)
 position_smoothing_enabled = true
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

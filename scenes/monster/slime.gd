@@ -37,7 +37,19 @@ func attack_player() -> void:
 	await get_tree().create_timer(attack_cooldown).timeout  # Tunggu cooldown selesai
 	can_attack = true  # Aktifkan serangan lagi
 
-# Fungsi
+# Fungsi untuk menerima damage
+func take_damage(amount: int) -> void:
+	health -= amount
+	if health <= 0:
+		die()
+
+# Fungsi untuk mati
+func die() -> void:
+	print("Slime has been killed")
+	$AnimatedSprite2D.play("die")
+	queue_free()  # Hapus slime dari scene
+
+# Fungsi untuk mendeteksi pemain
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):  # Pastikan pemain di dalam grup "player"
 		target_player = body  # Simpan referensi ke pemain
@@ -53,5 +65,5 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 		player_in_range = true
 		
 func _on_attack_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player") :
+	if body.is_in_group("player"):
 		player_in_range = false
