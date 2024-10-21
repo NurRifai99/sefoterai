@@ -1,47 +1,72 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqd2i2raop6h5"]
+[gd_scene load_steps=5 format=3 uid="uid://bqd2i2raop6h5"]
 
 [ext_resource type="Script" path="res://scripts/control.gd" id="1_0a4us"]
-[ext_resource type="Texture2D" uid="uid://b33bfgvo4ge5k" path="res://art/Dialog/FacesetBox.png" id="2_a8gp4"]
+[ext_resource type="Texture2D" uid="uid://d241t84hip4fm" path="res://art/Dialog/ChoiceBox.png" id="2_ao2io"]
+
+[sub_resource type="SystemFont" id="SystemFont_ei6id"]
+font_names = PackedStringArray("Harrington", "", "", "", "", "", "", "", "", "", "", "", "", "")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ay5gd"]
+line_spacing = 0.0
+font_size = 60
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 3.0
-offset_right = 8.0
-offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0a4us")
 
-[node name="FacesetBox" type="Sprite2D" parent="."]
-position = Vector2(127, 71.25)
-scale = Vector2(5.58333, 3.03125)
-texture = ExtResource("2_a8gp4")
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ao2io")
+expand_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = -88.2604
-offset_top = -48.9923
-offset_right = 72.7396
-offset_bottom = 31.0077
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 21.0
-offset_top = 9.0
-offset_right = 234.0
-offset_bottom = 131.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Play" type="Button" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ei6id")
+theme_override_font_sizes/font_size = 1
+text = "Welcome To The Sefoteria"
+label_settings = SubResource("LabelSettings_ay5gd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Play"
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit
 "
 
-[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

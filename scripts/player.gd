@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var health = 200
+var health = 20000
 var player_alive = true
 var damage_player = 20
 
@@ -60,6 +60,11 @@ func player_movement(_delta):
 		play_anim(0)
 
 	move_and_slide()
+	
+			#
+	#if Input.is_action_just_pressed("show_dialog"):
+		#DialogueManager.get_next_dialogue_line("res://dialog/nelayan.dialogue","start")
+		#
 
 # Handle attack input
 func _input(event):
@@ -70,7 +75,7 @@ func _input(event):
 
 		if target_monster:  # Jika ada monster dalam jangkauan
 			attack_monster(target_monster)  # Serang monster yang terdeteksi
-			print("Attacking the monster!")
+		
 
 
 func play_anim(movement):
@@ -135,9 +140,9 @@ func take_damage(amount: int) -> void:
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("monster"):  # Pastikan yang terkena serangan adalah monster
 		target_monster = body  # Simpan referensi ke monster
-		print("Monster in range!")
+		#print("Monster in range!")
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("monster"):
 		target_monster = null  # Hapus referensi ke monster
-		print("Monster out of range.")
+		#print("Monster out of range.")

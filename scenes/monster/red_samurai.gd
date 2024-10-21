@@ -15,6 +15,8 @@ func _ready() -> void:
 	$Timer.connect("timeout", Callable(self,"_on_cooldown_timeout"))
 
 func _physics_process(delta: float) -> void:
+	
+	#fungsi knockback
 	if is_knocked_back:
 		knockback_timer -= delta
 		if knockback_timer <= 0:
@@ -36,20 +38,16 @@ func chase_player(_delta: float) -> void:
 	velocity = direction * speed
 	$AnimatedSprite2D.play("walk")
 	move_and_slide()
-	
-	if(target_player.position.x - position.x) < 0:
-		$AnimatedSprite2D.flip_h = true
-	elif(target_player.position.x - position.x) > 0:
-		$AnimatedSprite2D.flip_h = false
 
 # Fungsi untuk menyerang pemain
 func attack_player() -> void:
 	if can_attack:
-		can_attack = false  # Nonaktifkan serangan selama cooldown
-		target_player.take_damage(damage)  # Serang pemain
+ # Nonaktifkan serangan selama cooldown
 		$AnimatedSprite2D.play("attack")
+		target_player.take_damage(damage)  # Serang pemain
 		print("player attacked ", damage)  
 		# Reset cooldown
+		can_attack = false 
 		$Timer.start(attack_cooldown)
 
 # Fungsi untuk menerima damage
@@ -70,7 +68,7 @@ func take_damage(amount: int) -> void:
 func die() -> void:
 	print("Slime has been killed")
 	$AnimatedSprite2D.play("die")
-	queue_free()  # Hapus slime dari scene
+	queue_free() 
 
 # Fungsi untuk mendeteksi pemain
 func _on_area_2d_body_entered(body: Node2D) -> void:
