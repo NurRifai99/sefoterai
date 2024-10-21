@@ -89,7 +89,7 @@ radius = 34.1321
 [sub_resource type="CircleShape2D" id="CircleShape2D_dqqf4"]
 radius = 8.0
 
-[node name="Spider" type="CharacterBody2D"]
+[node name="Spider" type="CharacterBody2D" groups=["monster"]]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hf410")

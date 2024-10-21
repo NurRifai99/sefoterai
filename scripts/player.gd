@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
-var health = 150
+var health = 200
 var player_alive = true
 var damage_player = 20
+
+var target_monster: Node2D = null  # Untuk menyimpan monster yang berada dalam jangkauan
 
 var attack_ip = false  # Menunjukkan jika serangan sedang berlangsung
 
@@ -26,7 +28,7 @@ func _physics_process(delta):
 		player_alive = false
 		health = 0
 		print("Player has been killed")
-		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+		#get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 
 func player_movement(_delta):
 	# Disable movement during attack
@@ -65,8 +67,10 @@ func _input(event):
 		attack_ip = true
 		attack_timer = 0.4  # Durasi serangan
 		play_anim(2)  # Mainkan animasi serangan
-		print("Player is attacking!")
-		
+
+		if target_monster:  # Jika ada monster dalam jangkauan
+			attack_monster(target_monster)  # Serang monster yang terdeteksi
+			print("Attacking the monster!")
 
 
 func play_anim(movement):
@@ -125,10 +129,15 @@ func take_damage(amount: int) -> void:
 	if health <= 0:
 		player_alive = false
 		print("Player has been killed")
-		self.queue_free()  # Remove player from the scene
+		get_tree().change_scene_to_file("res://scenes/MenuRestart.tscn")
+		#self.queue_free()  # Remove player from the scene
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("monster"):  # Pastikan yang terkena serangan adalah monster
-		body.take_damage(damage_player)  # Panggil fungsi take_damage dari monster dan berikan damage
-		print("Monster diserang!")
-		attack_monster(body)
+		target_monster = body  # Simpan referensi ke monster
+		print("Monster in range!")
+
+func _on_attack_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("monster"):
+		target_monster = null  # Hapus referensi ke monster
+		print("Monster out of range.")
