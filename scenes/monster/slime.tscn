@@ -268,8 +268,6 @@ shape = SubResource("CircleShape2D_xwfau")
 
 [node name="Timer" type="Timer" parent="."]
 
-<<<<<<< HEAD
-=======
 [node name="healthbar" type="ProgressBar" parent="."]
 modulate = Color(0.839216, 0.0196078, 0, 1)
 offset_left = -11.0
@@ -279,9 +277,12 @@ offset_bottom = -1.0
 scale = Vector2(0.3, 0.3)
 show_percentage = false
 
->>>>>>> 2f600d1 (health bar)
+[node name="Respawn" type="Timer" parent="."]
+wait_time = 10.0
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Respawn" to="." method="_on_respawn_timeout"]

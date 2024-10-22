@@ -1,21 +1,30 @@
 extends Node2D
-<<<<<<< HEAD
-
 
 var slime_scene = preload("res://scenes/monster/slime.tscn")
+var max_slime = 6
+var current_slime = 0
 
-func _ready():
-	pass#var num_slimes = 10  # Jumlah slime yang ingin di-spawn
-	#for i in range(num_slimes):
-		#var slime = slime_scene.instantiate()
-		#slime.position = Vector2(randi() % 500, randi() % 500)  # Posisi acak
-		#add_child(slime)
+var spawn_area_min = Vector2(1000, 500)  # Batas minimum
+var spawn_area_max = Vector2(1300, 900)  # Batas maksimum
 
-#func _on_player_died():
-	#get_tree().change_scene_to_file("res://scenes/Menu.tscn")
-=======
 func _ready() -> void:
-	var dialog_manager = load("res://scripts/DialogManager.tscn").instantiate()
-	add_child(dialog_manager)
-	dialog_manager.show_dialog("Welcome to the game! Click to continue.")
->>>>>>> 2f600d1 (health bar)
+	$Respawn.start()
+
+func _on_timer_timeout() -> void:
+	if current_slime < max_slime:	
+		print("timer ada")
+		var slime = slime_scene.instantiate()
+		var random_x = randf_range(spawn_area_min.x, spawn_area_max.x)
+		var random_y = randf_range(spawn_area_min.y, spawn_area_max.y)
+		slime.position = Vector2(random_x, random_y)
+		add_child(slime)
+		current_slime += 1
+		print("slime respawn")
+	else :
+		$Respawn.stop()
+		print("kelebihan tet")
+
+func start_respawn() -> void:
+	current_slime = 0  # Reset jumlah slime
+	$Respawn.start()  # Mulai kembali timer
+	print("Respawn timer started")

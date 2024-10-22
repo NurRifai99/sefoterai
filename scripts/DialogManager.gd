@@ -4,11 +4,11 @@ extends Control
 @onready var dialog_panel = $DialogPanel# Panel or any Control for the background
 
 func _ready() -> void: # Make the dialog elements invisible when the game starts
-	dialog_label.visible = false
-	dialog_panel.visible = false
-	
+	##dialog_label.visible = false
+	#dialog_panel.visible = false
+	pass
 	# Connect the click signal to the dialog box
-	dialog_panel.connect("gui_input", Callable(self, "_on_dialog_click"))
+	#dialog_panel.connect("gui_input", Callable(self, "_on_dialog_click"))
 
 func show_dialog(dialog_text: String) -> void:
 	# Show dialog text and make it visible
