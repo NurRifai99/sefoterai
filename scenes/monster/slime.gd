@@ -2,11 +2,17 @@ extends "res://scenes/monster/MonsterBase.gd"
 
 var can_attack = true
 var player_in_range = false
+<<<<<<< HEAD
+=======
+var max_health: int = 50
+var healthbar: ProgressBar
+>>>>>>> 2f600d1 (health bar)
 
 func _ready() -> void:
 	health = 50
 	damage = 10
 	speed = 20
+<<<<<<< HEAD
 	
 	attack_cooldown = 0.7
 	#target_player = null  # Referensi ke pemain yang ingin dikejar
@@ -15,6 +21,22 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+=======
+	healthbar = $healthbar
+	healthbar.max_value = max_health
+	attack_cooldown = 0.7
+	
+	var signal_callable = Callable(self, "_on_cooldown_timeout")
+	#target_player = null  # Referensi ke pemain yang ingin dikejar
+	$AnimatedSprite2D.play("idle")
+	if not $Timer.is_connected("timeout", signal_callable):
+		$Timer.connect("timeout", signal_callable)
+
+
+func _physics_process(delta: float) -> void:
+	update_health()
+	
+>>>>>>> 2f600d1 (health bar)
 	if is_knocked_back:
 		knockback_timer -= delta
 		if knockback_timer <= 0:
@@ -44,6 +66,7 @@ func chase_player(_delta: float) -> void:
 
 # Fungsi untuk menyerang pemain
 func attack_player() -> void:
+<<<<<<< HEAD
 	can_attack = false  # Nonaktifkan serangan selama cooldown
 	target_player.take_damage(damage)  # Serang pemain
 	
@@ -53,6 +76,15 @@ func attack_player() -> void:
 	# Reset cooldown
 	# Aktifkan serangan lagi
 	$Timer.start(attack_cooldown)
+=======
+	if can_attack:
+		can_attack = false  # Nonaktifkan serangan selama cooldown
+		target_player.take_damage(damage)  # Serang pemain
+		$AnimatedSprite2D.play("attack")
+		print("player attacked ", damage)  
+		# Reset cooldown
+		$Timer.start(attack_cooldown)
+>>>>>>> 2f600d1 (health bar)
 
 
 # Fungsi untuk menerima damage
@@ -68,6 +100,13 @@ func take_damage(amount: int) -> void:
 			is_knocked_back = true  # Set status knockback
 			knockback_timer = knockback_duration  # Reset timer knockback
 
+<<<<<<< HEAD
+=======
+func update_health():
+	healthbar.value = health
+	healthbar.visible = true
+
+>>>>>>> 2f600d1 (health bar)
 # Fungsi untuk mati
 func die() -> void:
 	print("Slime has been killed")

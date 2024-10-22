@@ -24,7 +24,11 @@ func die():
 
 
 func _physics_process(delta: float) -> void:
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 2f600d1 (health bar)
 	# Lanjutkan dengan logika monster lainnya, seperti mengejar pemain
 	if target_player:
 		chase_player(delta)

@@ -1,4 +1,5 @@
 extends Node2D
+<<<<<<< HEAD
 
 
 var slime_scene = preload("res://scenes/monster/slime.tscn")
@@ -12,3 +13,9 @@ func _ready():
 
 #func _on_player_died():
 	#get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+=======
+func _ready() -> void:
+	var dialog_manager = load("res://scripts/DialogManager.tscn").instantiate()
+	add_child(dialog_manager)
+	dialog_manager.show_dialog("Welcome to the game! Click to continue.")
+>>>>>>> 2f600d1 (health bar)

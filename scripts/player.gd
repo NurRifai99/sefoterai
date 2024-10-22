@@ -1,8 +1,19 @@
 extends CharacterBody2D
 
+<<<<<<< HEAD
 var health = 20000
 var player_alive = true
 var damage_player = 20
+=======
+var health = 100
+var player_alive = true
+var damage_player = 20
+var max_health = 100
+
+var health_regeneration_amount: int = 5
+var health_regeneration_interval: float = 2.5
+var regeneration_timer: Timer
+>>>>>>> 2f600d1 (health bar)
 
 var target_monster: Node2D = null  # Untuk menyimpan monster yang berada dalam jangkauan
 
@@ -12,11 +23,23 @@ const speed = 70
 var current_dir = "none"
 var attack_timer = 0.0  # Timer untuk melacak progres serangan
 
+<<<<<<< HEAD
 #func _ready() -> void:
 	#$AttackArea.connect("body_entered",Callable(self, "_on_attack_area_body_entered"))
 
 func _physics_process(delta):
 	player_movement(delta)
+=======
+func _ready() -> void:
+	regeneration_timer = Timer.new()
+	add_child(regeneration_timer)
+	regeneration_timer.wait_time = health_regeneration_interval
+	regeneration_timer.connect("timeout", Callable(self, "_on_timer_timeout"))
+
+func _physics_process(delta):
+	player_movement(delta)
+	update_health()
+>>>>>>> 2f600d1 (health bar)
 	
 	if attack_ip:
 		attack_timer -= delta
@@ -60,11 +83,14 @@ func player_movement(_delta):
 		play_anim(0)
 
 	move_and_slide()
+<<<<<<< HEAD
 	
 			#
 	#if Input.is_action_just_pressed("show_dialog"):
 		#DialogueManager.get_next_dialogue_line("res://dialog/nelayan.dialogue","start")
 		#
+=======
+>>>>>>> 2f600d1 (health bar)
 
 # Handle attack input
 func _input(event):
@@ -75,7 +101,11 @@ func _input(event):
 
 		if target_monster:  # Jika ada monster dalam jangkauan
 			attack_monster(target_monster)  # Serang monster yang terdeteksi
+<<<<<<< HEAD
 		
+=======
+			print("Attacking the monster!")
+>>>>>>> 2f600d1 (health bar)
 
 
 func play_anim(movement):
@@ -137,6 +167,7 @@ func take_damage(amount: int) -> void:
 		get_tree().change_scene_to_file("res://scenes/MenuRestart.tscn")
 		#self.queue_free()  # Remove player from the scene
 
+<<<<<<< HEAD
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("monster"):  # Pastikan yang terkena serangan adalah monster
 		target_monster = body  # Simpan referensi ke monster
@@ -146,3 +177,39 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("monster"):
 		target_monster = null  # Hapus referensi ke monster
 		#print("Monster out of range.")
+=======
+func update_health():
+	var healthbar = $healthbar
+	healthbar.value = health
+
+	if health >= 100 :
+		healthbar.visible = true
+
+func _on_timer_timeout():
+	if health < max_health:
+		health += health_regeneration_amount
+		if health >= max_health :
+			health = max_health
+
+func start_health_regeneration() -> void:
+	# Start the regeneration timer
+	if regeneration_timer.is_stopped():
+		regeneration_timer.start()
+		print("health regen bos")
+
+func stop_health_regeneration() -> void:
+	# Stop the regeneration timer
+	if not regeneration_timer.is_stopped():
+		regeneration_timer.stop()
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("monster"):  # Pastikan yang terkena serangan adalah monster
+		target_monster = body  # Simpan referensi ke monster
+		print("Monster in range!")
+
+func _on_attack_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("monster"):
+		start_health_regeneration()
+		target_monster = null  # Hapus referensi ke monster
+		print("Monster out of range.")
+>>>>>>> 2f600d1 (health bar)
