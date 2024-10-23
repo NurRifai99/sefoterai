@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqd2i2raop6h5"]
+
+[ext_resource type="FontFile" uid="uid://bdlxdpc38ftqf" path="res://Minecraft.ttf" id="1_11b2j"]
+[ext_resource type="Script" path="res://scripts/control.gd" id="1_sdn54"]
+[ext_resource type="Texture2D" uid="uid://b33bfgvo4ge5k" path="res://art/Dialog/FacesetBox.png" id="2_d4pmf"]
+[ext_resource type="Texture2D" uid="uid://rtark6jwo4o3" path="res://sefoteria-removebg-preview.png" id="4_sk4ni"]
+
+[sub_resource type="Theme" id="Theme_kg7s3"]
+default_font = ExtResource("1_11b2j")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_kg7s3")
+script = ExtResource("1_sdn54")
+
+[node name="FacesetBox" type="Sprite2D" parent="."]
+position = Vector2(447, 318.75)
+scale = Vector2(18.9167, 13.3437)
+texture = ExtResource("2_d4pmf")
+
+[node name="Sefoteria-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(447, 218)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_sk4ni")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 287.0
+offset_right = 448.0
+offset_bottom = 401.0
+scale = Vector2(2, 2)
+alignment = 1
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

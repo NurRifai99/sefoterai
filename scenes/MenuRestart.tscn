@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxledmcj8mbm0"]
+
+[ext_resource type="Texture2D" uid="uid://drp0ar0g1qtmd" path="res://icon.svg" id="1_crqgu"]
+[ext_resource type="Script" path="res://scenes/RestartButton.gd" id="2_w6o1c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6y2vp"]
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[node name="MenuRestart" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 446.0
+offset_bottom = 175.0
+color = Color(0, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 86.0
+offset_right = 146.0
+offset_bottom = 214.0
+texture = ExtResource("1_crqgu")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 293.0
+offset_bottom = 62.0
+text = "yahahah kalah"
+label_settings = SubResource("LabelSettings_6y2vp")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 177.0
+offset_top = 84.0
+offset_right = 278.0
+offset_bottom = 132.0
+text = "Restart"
+script = ExtResource("2_w6o1c")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

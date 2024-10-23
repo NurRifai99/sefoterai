@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://0e5ohn10yc4q"]
+
+[ext_resource type="Texture2D" uid="uid://0waka4o1ts4g" path="res://art/characters/NPC/CamouflageRed/SpriteSheet.png" id="1_kraku"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi5xn"]
+atlas = ExtResource("1_kraku")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uhiv"]
+atlas = ExtResource("1_kraku")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1p85"]
+atlas = ExtResource("1_kraku")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mrm7"]
+atlas = ExtResource("1_kraku")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ll15"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yi5xn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uhiv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1p85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mrm7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="OrangMisterios" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6ll15")
+frame_progress = 0.38626

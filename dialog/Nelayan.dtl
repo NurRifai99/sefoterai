@@ -1,0 +1,34 @@
+join Nelayan left [animation="Zoom In"]
+Nelayan: Apa yang kamu lakukan di sini?
+join kaelan left [animation="Zoom In"]
+kaelan: Aku mencari pedang yang tak terkalahkan
+kaelan: Maaf menggangu
+leave kaelan [animation="Zoom Out"]
+Nelayan: Pedang?
+Nelayan: Pedang apa yang kau cari? Pedang itu tidak ada di tempat ini
+join kaelan left [animation="Zoom In"]
+leave Nelayan
+kaelan: Apa!?
+leave kaelan [animation="Zoom Out"]
+\setelah sedikit berbincang dengan nelayan itu kaelan pun berkata dengan penuh semangat 
+join kaelan left [animation="Zoom In"]
+kaelan: aku akan menjadi yang paling lama bertahan di colosseum dan menjadi yang terkuat!
+leave kaelan [animation="Zoom Out"]
+join Nelayan left [animation="Zoom In"]
+Nelayan: jadi singkatnya kamu ingin menikahi sang putri hah? bodoh!
+Nelayan: biar kujelaskan, tidak ada orang yang dapat bertahan hidup setelah bertarung di colloseum. 
+Nelayan: Sudah banyak sekali nyawa yang berjatuhan semenjak sayembara itu dilakukan 2 tahun lalu itu dilakukan.
+leave Nelayan [animation="Zoom Out"]
+join kaelan left [animation="Zoom In"]
+kaelan: Tidak peduli, aku akan tetap berjuang untuk menjadi yang terkuat
+leave kaelan [animation="Zoom Out"]
+Tersentuh oleh kata-kata kaelan, sang nelayan berkata dengan penuh misteri
+join Nelayan left
+Nelayan: Kalau begitu kuberi kau sedikit nasehat, hutan ini menyimpan rahasia yang jauh lebih besar daripada sekadar pedang.
+leave Nelayan [animation="Zoom Out"]
+join kaelan left [animation="Zoom In"]
+kaelan: Apa maksudmu?
+leave kaelan
+join Nelayan left [animation="Zoom In"]
+Nelayan: Hutan ini adalah ujian
+Nelayan: Ujian untuk menguji kekuatan sejati seseorang. Bukan kekuatan fisik saja, tapi kekuatan pikiran dan semangat.
