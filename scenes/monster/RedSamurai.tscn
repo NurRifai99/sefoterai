@@ -176,11 +176,7 @@ radius = 118.004
 radius = 34.7131
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0fabw"]
-<<<<<<< HEAD
 radius = 23.0868
-=======
-radius = 15.0333
->>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 
 [node name="RedSamurai" type="CharacterBody2D" groups=["monster"]]
 script = ExtResource("1_ra8wf")
@@ -209,11 +205,7 @@ shape = SubResource("CircleShape2D_0fabw")
 one_shot = true
 
 [node name="healthbar" type="ProgressBar" parent="."]
-<<<<<<< HEAD
 modulate = Color(1, 0, 0.0313726, 1)
-=======
-modulate = Color(0.434172, 0, 0.0307187, 1)
->>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 offset_left = -23.0
 offset_top = -21.0
 offset_right = 120.0

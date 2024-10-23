@@ -1,13 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://csgibnbxx6sod"]
+[gd_scene load_steps=28 format=3 uid="uid://csgibnbxx6sod"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_6uffk"]
-[ext_resource type="Texture2D" uid="uid://bo6uk7g4hvofs" path="res://art/characters/LAnangzz/attack.png" id="2_lpbmk"]
+[ext_resource type="Texture2D" uid="uid://dg6pcagc0h8rp" path="res://art/characters/LAnangzz/animasi-attack/att-depan-1.png" id="2_0ar4b"]
+[ext_resource type="Texture2D" uid="uid://cn360le3wpvnq" path="res://art/characters/LAnangzz/animasi-attack/att-depan-2.png" id="3_qpu2t"]
 [ext_resource type="Texture2D" uid="uid://df7yvq3aso2pl" path="res://art/characters/LAnangzz/idle.png" id="3_rj83h"]
 [ext_resource type="Texture2D" uid="uid://d0eatqq2v3o52" path="res://art/characters/LAnangzz/walk.png" id="4_5hqvk"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nahs1"]
-atlas = ExtResource("2_lpbmk")
-region = Rect2(16, 0, 16, 16)
+[ext_resource type="Texture2D" uid="uid://dqwamsndxruu" path="res://art/characters/LAnangzz/animasi-attack/att-1.png" id="6_ahw3p"]
+[ext_resource type="Texture2D" uid="uid://bdbhkygsabcui" path="res://art/characters/LAnangzz/animasi-attack/att-2.png" id="7_xymqy"]
+[ext_resource type="Texture2D" uid="uid://bc8lnriavcqgb" path="res://art/characters/LAnangzz/animasi-attack/att-kanan-1.png" id="8_lpcdx"]
+[ext_resource type="Texture2D" uid="uid://dc23e142uvi0w" path="res://art/characters/LAnangzz/animasi-attack/att-kanan-2.png" id="9_yhdsh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1ayb"]
 atlas = ExtResource("3_rj83h")
@@ -29,10 +30,6 @@ region = Rect2(16, 32, 16, 16)
 atlas = ExtResource("4_5hqvk")
 region = Rect2(16, 48, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x3ar1"]
-atlas = ExtResource("2_lpbmk")
-region = Rect2(0, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_jiixq"]
 atlas = ExtResource("3_rj83h")
 region = Rect2(0, 0, 16, 16)
@@ -52,10 +49,6 @@ region = Rect2(0, 32, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_83lwo"]
 atlas = ExtResource("4_5hqvk")
 region = Rect2(0, 48, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_weqnt"]
-atlas = ExtResource("2_lpbmk")
-region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hy40b"]
 atlas = ExtResource("3_rj83h")
@@ -81,7 +74,10 @@ region = Rect2(48, 48, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nahs1")
+"texture": ExtResource("2_0ar4b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qpu2t")
 }],
 "loop": true,
 "name": &"back_attack",
@@ -114,7 +110,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_x3ar1")
+"texture": ExtResource("6_ahw3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xymqy")
 }],
 "loop": true,
 "name": &"front_attack",
@@ -147,7 +146,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_weqnt")
+"texture": ExtResource("8_lpcdx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yhdsh")
 }],
 "loop": true,
 "name": &"side_attack",
@@ -191,7 +193,8 @@ script = ExtResource("1_6uffk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 4)
 sprite_frames = SubResource("SpriteFrames_hck3s")
-animation = &"side_attack"
+animation = &"back_attack"
+frame_progress = 0.716933
 
 [node name="AttackArea" type="Area2D" parent="."]
 

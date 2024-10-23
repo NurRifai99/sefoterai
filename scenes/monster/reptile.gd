@@ -4,11 +4,11 @@ var can_attack = true
 var player_in_range = false
 
 func _ready() -> void:
-	health = 50
-	damage = 10
-	speed = 20
-	
-	attack_cooldown = 0.7
+	health = 500
+	damage = 50
+	speed = 69
+	knockback_strength = 10
+	attack_cooldown = 1.2
 	#target_player = null  # Referensi ke pemain yang ingin dikejar
 	$AnimatedSprite2D.play("first")
 
@@ -29,32 +29,30 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO  # Tidak bergerak jika tidak ada target
 
 # Fungsi untuk mengejar pemain
-func chase_player(_delta: float) -> void:
-	var direction = (target_player.position - position).normalized()
-	velocity = direction * speed
-	$AnimatedSprite2D.play("walk")
-	move_and_slide()
-	
-	if(target_player.position.x - position.x) < 0:
-		$AnimatedSprite2D.flip_h = true
-	elif(target_player.position.x - position.x) > 0:
-		$AnimatedSprite2D.flip_h = false
+func chase_player(delta: float) -> void:
+		position += (target_player.position - position).normalized() * speed * delta
+		move_and_collide(Vector2(0,0)) 
+		$AnimatedSprite2D.play("walk")
+		if(target_player.position.x - position.x) < 0:
+			$AnimatedSprite2D.flip_h = true
+		else:
+			$AnimatedSprite2D.flip_h = false
 
 # Fungsi untuk menyerang pemain
 func attack_player() -> void:
 	can_attack = false  # Nonaktifkan serangan selama cooldown
 	target_player.take_damage(damage)  # Serang pemain
-	
 	$AnimatedSprite2D.play("attack")
 	print("sernag")
 	print("menyerang player",damage)
 	# Reset cooldown
-	await get_tree().create_timer(attack_cooldown).timeout  # Tunggu cooldown selesai
-	can_attack = true  # Aktifkan serangan lagi
+	$Timer.start(attack_cooldown)
+
 
 # Fungsi untuk menerima damage
 func take_damage(amount: int) -> void:
 	health -= amount
+	$AnimatedSprite2D.play("take_damage")
 	if health <= 0:
 		die()
 	else:
@@ -73,7 +71,7 @@ func die() -> void:
 
 # Fungsi untuk mendeteksi pemain
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):  # Pastikan pemain di dalam grup "player"
+	if body.is_in_group("player"):  # Pastikan pemain di dalam grup "player"	
 		$AnimatedSprite2D.play("transform")
 		target_player = body  # Simpan referensi ke pemain
 
@@ -91,5 +89,9 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = false
 
-func _on_animated_sprite_2d_animation_finished() -> void:
-	pass # Replace with function body.
+#func _on_animated_sprite_2d_animation_finished() -> void:
+	#pass # Replace with function body.
+#
+
+func _on_timer_timeout() -> void:
+	can_attack = true

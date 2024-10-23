@@ -8,7 +8,7 @@ var healthbar: ProgressBar
 func _ready() -> void:
 	health = 50
 	damage = 10
-	speed = 20
+	speed = 10
 	healthbar = $healthbar
 	healthbar.max_value = max_health
 	attack_cooldown = 0.7
@@ -39,16 +39,15 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO  # Tidak bergerak jika tidak ada target
 
 # Fungsi untuk mengejar pemain
-func chase_player(_delta: float) -> void:
-	var direction = (target_player.position - position).normalized()
-	velocity = direction * speed
-	$AnimatedSprite2D.play("walk")
-	move_and_slide()
-	
-	if(target_player.position.x - position.x) < 0:
-		$AnimatedSprite2D.flip_h = true
-	elif(target_player.position.x - position.x) > 0:
-		$AnimatedSprite2D.flip_h = false
+func chase_player(delta: float) -> void:
+		position += (target_player.position - position).normalized() * speed * delta
+		move_and_collide(Vector2(0,0)) 
+		$AnimatedSprite2D.play("walk")
+		if(target_player.position.x - position.x) < 0:
+			$AnimatedSprite2D.flip_h = true
+		else:
+			$AnimatedSprite2D.flip_h = false
+
 
 # Fungsi untuk menyerang pemain
 func attack_player() -> void:

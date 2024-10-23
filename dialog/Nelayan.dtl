@@ -32,3 +32,26 @@ leave kaelan
 join Nelayan left [animation="Zoom In"]
 Nelayan: Hutan ini adalah ujian
 Nelayan: Ujian untuk menguji kekuatan sejati seseorang. Bukan kekuatan fisik saja, tapi kekuatan pikiran dan semangat.
+leave Nelayan [animation="Zoom Out"]
+join kaelan left [animation="Zoom In"]
+kaelan: Maksudmu?
+leave kaelan [animation="Zoom Out"]
+join Nelayan left [animation="Zoom In"]
+Nelayan: Untuk menjadi yang terkuat di colosseum, kau tidak hanya membutuhkan kekuatan fisik. 
+Nelayan: Kau juga membutuhkan keberanian, kecerdasan, dan kemampuan untuk mengatasi segala rintangan. 
+Nelayan: Apa kamu masih yakin untuk melanjutkan?
+leave Nelayan [animation="Zoom Out"]
+join kaelan left [animation="Zoom In"]
+kaelan: Tapi aku akan tetap mencoba!
+leave kaelan [animation="Zoom Out"]
+join Nelayan left [animation="Zoom In"]
+Nelayan: Baiklah
+Nelayan: Tapi ingatlah, hutan ini akan menguji batas kemampuanmu. Banyak yang telah mencoba, tapi hanya sedikit yang berhasil.
+leave Nelayan [animation="Zoom Out"]
+join kaelan left
+kaelan: Aku tidak akan menyerah!
+leave kaelan [animation="Zoom Out"]
+join Nelayan left [animation="Zoom In"]
+Nelayan: Bagus!
+Nelayan: Masuklah ke Tangga itu!
+Nelayan: Semoga keberuntungan menyertaimu.

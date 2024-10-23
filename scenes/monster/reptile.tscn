@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://egarjklhelco"]
+[gd_scene load_steps=62 format=3 uid="uid://egarjklhelco"]
 
 [ext_resource type="Script" path="res://scenes/monster/reptile.gd" id="1_fps7n"]
 [ext_resource type="Texture2D" uid="uid://duvhaspvrqr6t" path="res://art/characters/monster/TenguBlue/Attack.png" id="2_knpb7"]
@@ -398,7 +398,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hgg0g"]
-radius = 40.1123
+radius = 50.04
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7rqkt"]
+radius = 24.0208
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yvb12"]
 radius = 12.0
@@ -407,19 +410,22 @@ radius = 12.0
 script = ExtResource("1_fps7n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 18)
+scale = Vector2(0.972, 1)
 sprite_frames = SubResource("SpriteFrames_keynm")
-<<<<<<< HEAD
-animation = &"idle"
-=======
-animation = &"first"
-frame_progress = 0.181567
->>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
+animation = &"walk"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 19)
+position = Vector2(-1, 24)
 shape = SubResource("CircleShape2D_hgg0g")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, 27)
+shape = SubResource("CircleShape2D_7rqkt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 28)
@@ -430,3 +436,6 @@ shape = SubResource("CircleShape2D_yvb12")
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

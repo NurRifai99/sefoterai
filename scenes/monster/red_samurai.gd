@@ -9,6 +9,7 @@ func _ready() -> void:
 	health = 500
 	damage = 30
 	speed = 30
+	knockback_strength = 20
 	healthbar = $healthbar
 	healthbar.max_value = max_health
 	attack_cooldown = 1
@@ -37,22 +38,20 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO  # Tidak bergerak jika tidak ada target
 
 # Fungsi untuk mengejar pemain
-func chase_player(_delta: float) -> void:
-	var direction = (target_player.position - position).normalized()
-	velocity = direction * speed
-	$AnimatedSprite2D.play("walk")
-	move_and_slide()
+func chase_player(delta: float) -> void:
+		position += (target_player.position - position).normalized() * speed * delta
+		move_and_collide(Vector2(0,0)) 
+		$AnimatedSprite2D.play("walk")
+		if(target_player.position.x - position.x) < 0:
+			$AnimatedSprite2D.flip_h = true
+		else:
+			$AnimatedSprite2D.flip_h = false
 
 # Fungsi untuk menyerang pemain
 func attack_player() -> void:
 	if can_attack:
 		can_attack = false  # Nonaktifkan serangan selama cooldown
 		target_player.take_damage(damage)  # Serang pemain
-<<<<<<< HEAD
-=======
-		$AnimatedSprite2D.speed_scale = 0.1  # Set slower speed for attack
-		$AnimatedSprite2D.frame = 0  # Reset to frame 0 to ensure it starts fresh
->>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 		$AnimatedSprite2D.play("attack")
 		print("Attack animation speed: ", $AnimatedSprite2D.speed_scale)
 		print("player attacked ", damage)  

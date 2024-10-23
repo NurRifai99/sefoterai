@@ -16,7 +16,7 @@ var attack_ip = false  # Menunjukkan jika serangan sedang berlangsung
 const speed = 70
 var current_dir = "none"
 var attack_timer = 0.0  # Timer untuk melacak progres serangan
-
+ 
 func _ready() -> void:
 	regeneration_timer = Timer.new()
 	add_child(regeneration_timer)
@@ -42,7 +42,7 @@ func _physics_process(delta):
 func player_movement(_delta):
 	# Disable movement during attack
 	if attack_ip:
-		play_anim(2)  # Play attack animation
+		play_anim(1)  # Play attack animation
 		return
 	
 	velocity = Vector2.ZERO  # Reset velocity each frame
@@ -128,9 +128,9 @@ func play_anim(movement):
 func attack_monster(monster: Node2D):
 	if not attack_ip:
 		return  # Jika tidak sedang menyerang, keluar dari fungsi
-
-	monster.take_damage(damage_player)  # Berikan damage ke monster
-	print("Player attacked the monster for ", damage_player, " damage!")
+	else:
+		monster.take_damage(damage_player)  # Berikan damage ke monster
+		print("Player attacked the monster for ", damage_player, " damage!")
 
 
 func take_damage(amount: int) -> void:
@@ -138,11 +138,7 @@ func take_damage(amount: int) -> void:
 	if health <= 0:
 		player_alive = false
 		print("Player has been killed")
-<<<<<<< HEAD
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
-=======
-		get_tree().change_scene_to_file("res://scenes/MenuRestart.tscn")
->>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 		#self.queue_free()  # Remove player from the scene
 
 func update_health():
