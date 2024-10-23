@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [gd_scene load_steps=20 format=3 uid="uid://bxr4ganlie00u"]
 
 [ext_resource type="Script" path="res://scenes/monster/snake.gd" id="1_amebr"]
@@ -23,6 +24,12 @@ region = Rect2(16, 32, 16, 16)
 atlas = ExtResource("1_ksyjc")
 region = Rect2(16, 48, 16, 16)
 
+=======
+[gd_scene load_steps=13 format=3 uid="uid://bxr4ganlie00u"]
+
+[ext_resource type="Texture2D" uid="uid://bfp74usm5oksh" path="res://art/characters/monster/Snake/Snake.png" id="1_ksyjc"]
+
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 [sub_resource type="AtlasTexture" id="AtlasTexture_l2rlo"]
 atlas = ExtResource("1_ksyjc")
 region = Rect2(0, 0, 16, 16)
@@ -59,6 +66,7 @@ region = Rect2(48, 48, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+<<<<<<< HEAD
 "texture": SubResource("AtlasTexture_tae70")
 }],
 "loop": true,
@@ -84,6 +92,8 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+=======
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 "texture": SubResource("AtlasTexture_l2rlo")
 }, {
 "duration": 1.0,
@@ -117,12 +127,18 @@ animations = [{
 "speed": 5.0
 }]
 
+<<<<<<< HEAD
 [sub_resource type="CircleShape2D" id="CircleShape2D_258wi"]
 radius = 46.0
+=======
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7nid"]
+radius = 33.0151
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_osvd1"]
 radius = 6.0
 
+<<<<<<< HEAD
 [sub_resource type="CircleShape2D" id="CircleShape2D_h7nid"]
 radius = 18.0
 
@@ -133,10 +149,19 @@ script = ExtResource("1_amebr")
 sprite_frames = SubResource("SpriteFrames_vg0ka")
 animation = &"attack"
 frame_progress = 0.402956
+=======
+[node name="Snake" type="CharacterBody2D" groups=["monster"]]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vg0ka")
+animation = &"walk"
+frame_progress = 0.845586
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+<<<<<<< HEAD
 shape = SubResource("CircleShape2D_258wi")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
@@ -164,3 +189,19 @@ show_percentage = false
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+=======
+shape = SubResource("CircleShape2D_h7nid")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_osvd1")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="healthbar" type="ProgressBar" parent="."]
+offset_left = -10.0
+offset_top = 8.0
+offset_right = 60.0
+offset_bottom = 35.0
+scale = Vector2(0.3, 0.3)
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316

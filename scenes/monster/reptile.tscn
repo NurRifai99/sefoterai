@@ -408,7 +408,12 @@ script = ExtResource("1_fps7n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_keynm")
+<<<<<<< HEAD
 animation = &"idle"
+=======
+animation = &"first"
+frame_progress = 0.181567
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 
 [node name="Area2D" type="Area2D" parent="."]
 

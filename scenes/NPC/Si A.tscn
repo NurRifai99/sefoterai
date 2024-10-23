@@ -62,7 +62,11 @@ animations = [{
 radius = 5.43928
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ugt73"]
+<<<<<<< HEAD
 radius = 14.9358
+=======
+radius = 21.5522
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 
 [node name="Si A" type="CharacterBody2D"]
 scale = Vector2(1.3, 1.3)

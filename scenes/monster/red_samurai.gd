@@ -48,6 +48,11 @@ func attack_player() -> void:
 	if can_attack:
 		can_attack = false  # Nonaktifkan serangan selama cooldown
 		target_player.take_damage(damage)  # Serang pemain
+<<<<<<< HEAD
+=======
+		$AnimatedSprite2D.speed_scale = 0.1  # Set slower speed for attack
+		$AnimatedSprite2D.frame = 0  # Reset to frame 0 to ensure it starts fresh
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 		$AnimatedSprite2D.play("attack")
 		print("Attack animation speed: ", $AnimatedSprite2D.speed_scale)
 		print("player attacked ", damage)  

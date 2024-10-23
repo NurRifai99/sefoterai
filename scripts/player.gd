@@ -138,7 +138,11 @@ func take_damage(amount: int) -> void:
 	if health <= 0:
 		player_alive = false
 		print("Player has been killed")
+<<<<<<< HEAD
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+=======
+		get_tree().change_scene_to_file("res://scenes/MenuRestart.tscn")
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 		#self.queue_free()  # Remove player from the scene
 
 func update_health():

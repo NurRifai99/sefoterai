@@ -1,6 +1,14 @@
 ~ start
 halo: cek
 lala: adasdasda
+<<<<<<< HEAD
 - ok
 - nope
+=======
+lel: asu
+- red
+	chec: akas
+- blue
+	rell: well
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 => END	

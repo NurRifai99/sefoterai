@@ -248,7 +248,12 @@ script = ExtResource("1_nsm4u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tb1x7")
+<<<<<<< HEAD
 animation = &"back_walk"
+=======
+animation = &"attack"
+frame_progress = 0.120143
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -268,7 +273,11 @@ shape = SubResource("CircleShape2D_xwfau")
 [node name="Timer" type="Timer" parent="."]
 
 [node name="healthbar" type="ProgressBar" parent="."]
+<<<<<<< HEAD
 modulate = Color(1, 0.0196078, 0, 1)
+=======
+modulate = Color(0.839216, 0.0196078, 0, 1)
+>>>>>>> 5ed8c84aca1f9a5d55b13ab00f6c37af6e1bd316
 offset_left = -11.0
 offset_top = -11.0
 offset_right = 59.0
